@@ -83,6 +83,31 @@ public class Teleop extends LinearOpMode {
                 launchServo.setPosition(0);
             }
 
+            if (gamepad1.x) {
+                //encoderDrive(0.2,  -40,  -40, 5.0);
+                frontLeftMotor.setPower(0.3);
+                frontRightMotor.setPower(0.3);
+                backLeftMotor.setPower(0.3);
+                backRightMotor.setPower(0.3);
+
+                sleep(2000);
+                frontLeftMotor.setPower(0);
+                frontRightMotor.setPower(0);
+                backLeftMotor.setPower(0);
+                backRightMotor.setPower(0);
+
+                grabberL.setPosition(1);
+                grabberR.setPosition(0);
+                rotator.setPower(0.1);
+                sleep(800);
+
+                grabberL.setPosition(0.4);
+                grabberR.setPosition(0.5);
+
+                RotateArm(-1300, 1.0, 4000);
+
+            }
+
             //
             // Game Pad #2
 
@@ -92,6 +117,8 @@ public class Teleop extends LinearOpMode {
 
             }
             else if (gamepad2.dpad_up) {    // pull up grabbers
+                grabberL.setPosition(0.4);
+                grabberR.setPosition(0.5);
                 grabberTilt.setPosition(1.0);
             }
 

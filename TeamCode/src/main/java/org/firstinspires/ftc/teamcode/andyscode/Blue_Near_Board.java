@@ -79,42 +79,62 @@ public class Blue_Near_Board extends AutoCommon {
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
 
         // Step 1:  Drive forward for 3 seconds
-        grabberTilt.setPosition(0.1);
+        grabberTilt.setPosition(0.2);
 
         String line = detectTeamPropLine("blue near");
         //line = "middle";
         visionPortal.close();
         if (line.equals("middle")) {
-            //driveToMiddleLine();
-            encoderDrive(0.1,  30,  30, 5.0);
-            //strafe(0.2, 1000);
+
+            /*
+            encoderDrive(0.2,  4,  4, 5.0);
+            turnToTargetYaw2(8+yaw0, 0.8, 5000);
+            encoderDrive(0.2,  30,  30, 5.0);
+
+             */
+            encoderDrive(0.2,  31,  31, 5.0);
             dropPixelOnLine();
-            //forward(0.2, 1000);
-            encoderDrive(0.1,   -8, -8, 4.0);
-            //encoderDrive(0.2,   27, 27, 4.0);
-            //encoderDrive(1,   -5, 5, 4.0);
-            //shiftLeft(0.2, 2000);
-            //turn(-0.5, 0.3,1260);
-            //turnToTargetYaw(60+yaw0, 0.4, 5000);
-            //encoderDrive(0.1,  12,  12, 5.0);
-            //turnToTargetYaw(-90+yaw0, 0.6, 8000);
-            //encoderDrive(0.5,   , -6, 4.0);
-            //driveToBackBoardNearSide(2);
-            //driveToBackBoardByAprilTag(2);
-            //encoderDrive(0.1,  -45,  -45, 5.0);
-            //backward(0.2, 5000);
-            //dropPixelOnBoard();
+
+            encoderDrive(0.2,  -3,  -3, 5.0);
+            strafe(0.3,1000);
+
+            turnToTargetYaw2(-120+yaw0, 1.0, 8000);
+            encoderDrive(0.2,  -10,  -10, 5.0);
+            RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
+            //rotator.setPower(0.1);
+            encoderDrive(0.2,  -40,  -40, 5.0);
+            grabberL.setPosition(1);
+            rotator.setPower(0.1);
+            sleep(500);
+
+            RotateArm(-RORATE_ARM_TICKS, 1.0, 4000);
+            strafe(-0.4,1500);
         }
         else if (line.equals("left")) {
-            //driveToLeftLine();
-            //backward(0.2, 2500);
-            encoderDrive(0.1,  4,  4, 5.0);
-            turn(-0.8,0.8, 300);
-            //turnToTargetYaw(15+yaw0, 0.8, 5000);
-            encoderDrive(0.1,  20,  20, 5.0);
-            dropPixelOnLine();
-            encoderDrive(0.1,  -10,  -10, 5.0);
 
+            encoderDrive(0.2,  4,  4, 5.0);
+            turnToTargetYaw(15+yaw0, 0.2, 5000);
+            encoderDrive(0.2,  26,  26, 5.0);
+
+            //encoderDrive(0.2,  30,  30, 5.0);
+            //turnToTargetYaw(40+yaw0, 0.2, 5000);
+            dropPixelOnLine();
+            //encoderDrive(0.2,  -4,  -4, 5.0);
+            //strafe(0.4,500);
+            //encoderDrive(0.2,  10,  10, 5.0);
+
+            turnToTargetYaw2(-98+yaw0, 1, 5000);
+            encoderDrive(0.2,  -10,  -10, 5.0);
+
+            RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
+            //rotator.setPower(0.1);
+            encoderDrive(0.2,  -40,  -40, 5.0);
+            grabberL.setPosition(1);
+            rotator.setPower(0.1);
+            sleep(500);
+
+            RotateArm(-RORATE_ARM_TICKS, 1.0, 4000);
+            strafe(-0.4,1500);
             //turnToTargetYaw2(90+yaw0, 0.6, 5000);
             //driveToBackBoardByAprilTag(1);
             //encoderDrive(0.1,  -48,  -48, 5.0);
@@ -135,15 +155,32 @@ public class Blue_Near_Board extends AutoCommon {
             //dropPixelOnBoard();
         }
         else {
-            //driveToRightLine();
-            encoderDrive(0.1,  14,  14, 5.0);
-            //turn(0.1, -0.5,1000);
-            turn(0.8,-0.8,400);
-            encoderDrive(0.1,  11,  11, 5.0);
+            encoderDrive(0.2,  26,  26, 5.0);
+            turnToTargetYaw(-35+yaw0, 0.2, 5000);
+            //encoderDrive(0.2,  38,  38, 5.0);
+            //turnToTargetYaw2(-45+yaw0, 0.2, 5000);
+            encoderDrive(0.2,  2,  2, 5.0);
             dropPixelOnLine();
+            encoderDrive(0.4,  -10,  -10, 5.0);
+            /*
+            encoderDrive(0.4,  -14,  -14, 5.0);
+            turnToTargetYaw(yaw0, 0.8, 5000);
+            encoderDrive(0.4,  32,  32, 5.0);
 
-            //turnToTargetYaw(-40+yaw0, 0.8, 5000);
-            encoderDrive(0.1,  -17,  -17, 5.0);
+             */
+
+            turnToTargetYaw2(-125+yaw0, 0.8, 6000);
+            encoderDrive(0.4,  -10,  -10, 5.0);
+
+            RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
+            //rotator.setPower(0.1);
+            encoderDrive(0.2,  -40,  -40, 5.0);
+            grabberL.setPosition(1);
+            rotator.setPower(0.1);
+            sleep(500);
+
+            RotateArm(-RORATE_ARM_TICKS, 1.0, 4000);
+            strafe(0.4,2000);
             /*
             encoderDrive(0.3,  -17,  -17, 5.0);
             //turn(0.1, -0.5,1000);

@@ -63,17 +63,31 @@ public class Red_Near_Board extends AutoCommon {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
-        grabberTilt.setPosition(0.1);
+        grabberTilt.setPosition(0.2);
         // Step 1:  Drive forward for 3 seconds
         String line = detectTeamPropLine("red near");
         visionPortal.close();
         //line = "left";
 
         if (line.equals("middle")) {
-            encoderDrive(0.1,  31,  31, 5.0);
+            encoderDrive(0.2,  30,  30, 5.0);
+            //turnToTargetYaw4(-5+yaw0, 1.0, 6000);
+            //encoderDrive(0.2,  26,  26, 5.0);
+            //strafe(0.2, 1000);
             dropPixelOnLine();
-            //forward(0.2, 1000);
-            encoderDrive(0.2,   -10, -10, 4.0);
+            encoderDrive(0.2,  -2,  -2, 5.0);
+
+            turnToTargetYaw4(100+yaw0, 1.0, 6000);
+            encoderDrive(0.2,  -10,  -10, 5.0);
+            RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
+            //rotator.setPower(0.1);
+            encoderDrive(0.2,  -45,  -45, 5.0);
+            grabberL.setPosition(1);
+            rotator.setPower(0.1);
+            sleep(500);
+
+            RotateArm(-RORATE_ARM_TICKS, 1.0, 4000);
+            strafe(0.4,1000);
             //driveToMiddleLine();
             //encoderDrive(0.1,  34,  34, 5.0);
             //dropPixelOnLine();
@@ -92,12 +106,25 @@ public class Red_Near_Board extends AutoCommon {
             //dropPixelOnBoard();
         }
         else if (line.equals("right")) {
-            encoderDrive(0.1,  4,  4, 5.0);
-            turn(0.8,-0.8, 200);
-            //turnToTargetYaw(-15+yaw0, 0.8, 5000);
-            encoderDrive(0.1,  18,  18, 5.0);
+            encoderDrive(0.2,  4,  4, 5.0);
+            turnToTargetYaw(-13+yaw0, 0.2, 5000);
+            encoderDrive(0.2,  24,  24, 5.0);
+
             dropPixelOnLine();
-            encoderDrive(0.1,  -10,  -10, 5.0);
+            encoderDrive(0.2,  -4,  -4, 5.0);
+
+            turnToTargetYaw4(95+yaw0, 1, 5000);
+            encoderDrive(0.2,  -10,  -10, 5.0);
+
+            RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
+            //rotator.setPower(0.1);
+            encoderDrive(0.2,  -40,  -40, 5.0);
+            grabberL.setPosition(1);
+            rotator.setPower(0.1);
+            sleep(500);
+
+            RotateArm(-RORATE_ARM_TICKS, 1.0, 4000);
+            strafe(0.4,1000);
             //driveToLeftLine();
             //driveToLeftLine();
             //backward(0.2, 2500);
@@ -128,15 +155,32 @@ public class Red_Near_Board extends AutoCommon {
         }
         else {
             //driveToRightLine();
-            encoderDrive(0.1,  20,  20, 5.0);
-            //turn(0.1, -0.5,1000);
-            turn(-0.8,0.8,600);
-            encoderDrive(0.1,  8,  8, 5.0);
+            encoderDrive(0.2,  26,  26, 5.0);
+            turnToTargetYaw(45+yaw0, 0.2, 5000);
+            //encoderDrive(0.2,  38,  38, 5.0);
+            //turnToTargetYaw2(-45+yaw0, 0.2, 5000);
+            encoderDrive(0.2,  3,  3, 5.0);
             dropPixelOnLine();
+            encoderDrive(0.4,  -11,  -11, 5.0);
+            /*
+            encoderDrive(0.4,  -14,  -14, 5.0);
+            turnToTargetYaw(yaw0, 0.8, 5000);
+            encoderDrive(0.4,  32,  32, 5.0);
 
-            //turnToTargetYaw(-40+yaw0, 0.8, 5000);
-            encoderDrive(0.1,  -17,  -17, 5.0);
-            //driveToRightLine();
+             */
+
+            turnToTargetYaw4(115+yaw0, 1.0, 8000);
+            encoderDrive(0.4,  -10,  -10, 5.0);
+
+            RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
+            //rotator.setPower(0.1);
+            encoderDrive(0.2,  -40,  -40, 5.0);
+            grabberL.setPosition(1);
+            rotator.setPower(0.1);
+            sleep(500);
+
+            RotateArm(-RORATE_ARM_TICKS, 1.0, 4000);
+            strafe(-0.4,1000);
         }
 
         //visionPortal.close();

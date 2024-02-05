@@ -37,12 +37,13 @@ public abstract class AutoCommon extends LinearOpMode {
     protected ElapsedTime     runtime = new ElapsedTime();
 
     // For motot encoders
-    protected static final double     COUNTS_PER_MOTOR_REV    = 100 ;    // eg: TETRIX Motor Encoder
+    protected static final double     COUNTS_PER_MOTOR_REV    = 500 ;    // eg: TETRIX Motor Encoder
     protected static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // No External Gearing.
     protected static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
     protected static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
 
+    protected static final int RORATE_ARM_TICKS = 1200;
     // IMU control
     public IMU imu;
 
@@ -52,7 +53,7 @@ public abstract class AutoCommon extends LinearOpMode {
     public double yaw0;
 
     public double ticksPerInch = 31.3;
-    public double ticksPerDegree = 12;
+    public double ticksPerDegree = 15;
     // Tensor flow/april tag instance variables
     protected static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
 
@@ -123,7 +124,7 @@ public abstract class AutoCommon extends LinearOpMode {
         // When run, this OpMode should start both motors driving forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
 
-        backrightDrive.setDirection(DcMotor.Direction.REVERSE);
+        backrightDrive.setDirection(DcMotor.Direction.FORWARD);
         backleftDrive.setDirection(DcMotor.Direction.REVERSE);
         frontrightDrive.setDirection(DcMotor.Direction.FORWARD);
         frontleftDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -289,7 +290,7 @@ public abstract class AutoCommon extends LinearOpMode {
             result = "left";
          */
 
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i < 150; i++) {
             List<Recognition> currentRecognitions = tfod.getRecognitions();
             if(currentRecognitions.isEmpty()){
                 sleep(20);
@@ -308,6 +309,14 @@ public abstract class AutoCommon extends LinearOpMode {
                 telemetry.addData("- Position", "%.0f / %.0f", x, y);
                 telemetry.addData("- Size", "%.0f x %.0f", recognition.getWidth(), recognition.getHeight());
 
+                if (x >350) {
+                    result = "middle";
+                    break;
+                } else {
+                    result = "left";
+                    break;
+                }
+                /*
                 if (init_pos.equals("blue near") || init_pos.equals("red near")){
                     if (x >450) {
                         result = "middle";
@@ -318,7 +327,7 @@ public abstract class AutoCommon extends LinearOpMode {
                     }
                 }
                 else {
-                    /*
+
                     if (x < 150) {
                         result = "left";
                         break;
@@ -327,7 +336,7 @@ public abstract class AutoCommon extends LinearOpMode {
                         break;
                     }
 
-                     */
+
                     if (x >450) {
                         result = "middle";
                         break;
@@ -336,6 +345,8 @@ public abstract class AutoCommon extends LinearOpMode {
                         break;
                     }
                 }
+
+                 */
 
 
                 //}
@@ -423,7 +434,7 @@ public abstract class AutoCommon extends LinearOpMode {
         frontrightDrive.setPower(-power);
         backrightDrive.setPower(power);
         sleep(milliseconds);
-        turnToTargetYaw2(90+yaw0, 0.4, 5000);
+        //turnToTargetYaw2(90+yaw0, 0.4, 5000);
         frontleftDrive.setPower(0);
         backleftDrive.setPower(0);
         frontrightDrive.setPower(0);
@@ -435,6 +446,12 @@ public abstract class AutoCommon extends LinearOpMode {
         //grabberL.setPosition(0);
         sleep(1000);
         grabberTilt.setPosition(1);
+        sleep(250);
+        grabberR.setPosition(1);
+        sleep(500);
+        grabberTilt.setPosition(1);
+        sleep(250);
+
     }
     public void dropPixelOnBoard() {
 
@@ -567,8 +584,22 @@ public abstract class AutoCommon extends LinearOpMode {
         backrightDrive.setPower(0);
     }
 
+    void RotateArm(int ticks, double power, long timeOutMills) {
+        long timeCurrent, timeBegin;
+        timeBegin = timeCurrent = System.currentTimeMillis();
 
-    public void turnToTargetYaw(double targetYawDegree, double power, long maxAllowedTimeInMills){
+        rotator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rotator.setTargetPosition(ticks);
+        rotator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rotator.setPower(power);
+        while(opModeIsActive()
+                && rotator.isBusy()
+                && (timeCurrent - timeBegin) < timeOutMills) {
+            timeCurrent = System.currentTimeMillis();
+        }
+        rotator.setPower(0.1 * power);
+    }
+    public void turnToTargetYaw3(double targetYawDegree, double power, long maxAllowedTimeInMills){
         long timeBegin, timeCurrent;
         double currentYaw = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);;
         int ticks, tickDirection;
@@ -626,8 +657,100 @@ public abstract class AutoCommon extends LinearOpMode {
                 && opModeIsActive()
                 && ((timeCurrent-timeBegin) < maxAllowedTimeInMills)) {
             ticks = (int) (diffYaw * ticksPerDegree);
-            if (ticks > 130)
-                ticks = 130;
+            if (ticks > 600)
+                ticks = 600;
+
+            tickDirection = (currentYaw < targetYawDegree) ? -1 : 1;
+            if (ticks < 1)
+                break;
+            if (diffYaw > 3)
+                factor = 1.0;
+            else
+                factor = diffYaw / 3;
+            if (targetYawDegree<0) {
+                driveMotors(
+                        (int) (tickDirection * ticks * 0.1),
+                        (int) (tickDirection * ticks * 0.1),
+                        -(int) (tickDirection * ticks),
+                        -(int) (tickDirection * ticks),
+                        power * factor, false, 0);
+            }
+            else {
+                driveMotors(
+                        (int) (tickDirection * ticks),
+                        (int) (tickDirection * ticks),
+                        -(int) (tickDirection * ticks * 0.1),
+                        -(int) (tickDirection * ticks * 0.1),
+                        power * factor, false, 0);
+            }
+            currentYaw = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+            timeCurrent = System.currentTimeMillis();
+            diffYaw = Math.abs(currentYaw - targetYawDegree);
+
+            telemetry.addLine(String.format("\nCurrentYaw=%.2f\nTargetYaw=%.2f\nTimeLapsed=%.2f ms",
+                    currentYaw, targetYawDegree, (double)(timeCurrent-timeBegin)));
+            telemetry.update();
+        }
+    }
+    public void turnToTargetYaw4(double targetYawDegree, double power, long maxAllowedTimeInMills){
+        long timeBegin, timeCurrent;
+        double currentYaw = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);;
+        int ticks, tickDirection;
+        double factor = 1.0;
+
+        double diffYaw = Math.abs(currentYaw - targetYawDegree);
+        telemetry.addLine(String.format("\nCurrentYaw=%.2f\nTargetYaw=%.2f", currentYaw, targetYawDegree));
+        telemetry.update();
+
+        timeBegin = timeCurrent = System.currentTimeMillis();
+        while (diffYaw > 0.5
+                && opModeIsActive()
+                && ((timeCurrent-timeBegin) < maxAllowedTimeInMills)) {
+            ticks = (int) (diffYaw * ticksPerDegree);
+            if (ticks > 600)
+                ticks = 600;
+
+            tickDirection = (currentYaw < targetYawDegree) ? -1 : 1;
+            if (ticks < 1)
+                break;
+            if (diffYaw > 3)
+                factor = 1.0;
+            else
+                factor = diffYaw / 3;
+
+                driveMotors(
+                        (int) (tickDirection * ticks),
+                        (int) (tickDirection * ticks),
+                        -(int) (tickDirection * ticks),
+                        -(int) (tickDirection * ticks),
+                        power * factor, false, 0);
+
+            currentYaw = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+            timeCurrent = System.currentTimeMillis();
+            diffYaw = Math.abs(currentYaw - targetYawDegree);
+
+            telemetry.addLine(String.format("\nCurrentYaw=%.2f\nTargetYaw=%.2f\nTimeLapsed=%.2f ms",
+                    currentYaw, targetYawDegree, (double)(timeCurrent-timeBegin)));
+            telemetry.update();
+        }
+    }
+    public void turnToTargetYaw(double targetYawDegree, double power, long maxAllowedTimeInMills){
+        long timeBegin, timeCurrent;
+        double currentYaw = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);;
+        int ticks, tickDirection;
+        double factor = 1.0;
+
+        double diffYaw = Math.abs(currentYaw - targetYawDegree);
+        telemetry.addLine(String.format("\nCurrentYaw=%.2f\nTargetYaw=%.2f", currentYaw, targetYawDegree));
+        telemetry.update();
+
+        timeBegin = timeCurrent = System.currentTimeMillis();
+        while (diffYaw > 0.5
+                && opModeIsActive()
+                && ((timeCurrent-timeBegin) < maxAllowedTimeInMills)) {
+            ticks = (int) (diffYaw * ticksPerDegree);
+            if (ticks > 200)
+                ticks = 200;
 
             tickDirection = (currentYaw < targetYawDegree) ? -1 : 1;
             if (ticks < 1)
@@ -639,8 +762,8 @@ public abstract class AutoCommon extends LinearOpMode {
             driveMotors(
                     (int)(tickDirection * ticks),
                     (int)(tickDirection * ticks),
-                    -(int)(tickDirection * ticks*0.5),
-                    -(int)(tickDirection * ticks*0.5),
+                    -(int)(tickDirection * ticks),
+                    -(int)(tickDirection * ticks),
                     power * factor, false, 0);
             currentYaw = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
             timeCurrent = System.currentTimeMillis();

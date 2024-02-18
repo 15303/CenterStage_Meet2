@@ -84,6 +84,10 @@ public class Teleop extends LinearOpMode {
             }
 
             if (gamepad1.x) {
+                grabberL.setPosition(0);
+                grabberR.setPosition(0.5);
+                RotateArm(1500, 1.0, 2000);
+                //sleep(200);
                 //encoderDrive(0.2,  -40,  -40, 5.0);
                 frontLeftMotor.setPower(0.3);
                 frontRightMotor.setPower(0.3);
@@ -96,15 +100,15 @@ public class Teleop extends LinearOpMode {
                 backLeftMotor.setPower(0);
                 backRightMotor.setPower(0);
 
-                grabberL.setPosition(1);
+                grabberL.setPosition(0.5);
                 grabberR.setPosition(0);
                 rotator.setPower(0.1);
                 sleep(800);
 
-                grabberL.setPosition(0.4);
+                grabberL.setPosition(0);
                 grabberR.setPosition(0.5);
 
-                RotateArm(-1300, 1.0, 4000);
+                RotateArm(-1500, 1.0, 4000);
 
             }
 
@@ -117,17 +121,19 @@ public class Teleop extends LinearOpMode {
 
             }
             else if (gamepad2.dpad_up) {    // pull up grabbers
-                grabberL.setPosition(0.4);
+                grabberL.setPosition(0);
                 grabberR.setPosition(0.5);
                 grabberTilt.setPosition(1.0);
             }
 
             // grabber
             if (gamepad2.left_bumper) {
-                grabberL.setPosition(1);
+                //grabberL.setPosition(1);
+                grabberL.setPosition(0.5);
             }
             if (gamepad2.left_trigger > 0.3) {
-                grabberL.setPosition(0.4);
+                //grabberL.setPosition(0.6);
+                grabberL.setPosition(0);
             }
 
             if (gamepad2.right_bumper) {
@@ -139,12 +145,13 @@ public class Teleop extends LinearOpMode {
 
 
             // arm rotation
+
             if (gamepad2.a){
-                RotateArm(-100, 1.0, 200);
+                RotateArm(-200, 1.0, 200);
                 rotator.setPower(0.1);
             }
             else if(gamepad2.b){
-                RotateArm(100, 1.0, 200);
+                RotateArm(200, 1.0, 200);
                 rotator.setPower(0.1);
             }
 
@@ -174,6 +181,6 @@ public class Teleop extends LinearOpMode {
                 && (timeCurrent - timeBegin) < timeOutMills) {
             timeCurrent = System.currentTimeMillis();
         }
-        rotator.setPower(0.1 * power);
+        rotator.setPower(0 * power);
     }
 }

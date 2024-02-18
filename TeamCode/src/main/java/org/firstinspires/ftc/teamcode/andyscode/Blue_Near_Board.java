@@ -79,7 +79,7 @@ public class Blue_Near_Board extends AutoCommon {
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
 
         // Step 1:  Drive forward for 3 seconds
-        grabberTilt.setPosition(0.2);
+        grabberTilt.setPosition(0.1);
 
         String line = detectTeamPropLine("blue near");
         //line = "middle";
@@ -103,7 +103,7 @@ public class Blue_Near_Board extends AutoCommon {
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.2,  -40,  -40, 5.0);
-            grabberL.setPosition(1);
+            grabberL.setPosition(0.3);
             rotator.setPower(0.1);
             sleep(500);
 
@@ -129,7 +129,7 @@ public class Blue_Near_Board extends AutoCommon {
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.2,  -40,  -40, 5.0);
-            grabberL.setPosition(1);
+            grabberL.setPosition(0.3);
             rotator.setPower(0.1);
             sleep(500);
 
@@ -175,7 +175,7 @@ public class Blue_Near_Board extends AutoCommon {
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.2,  -40,  -40, 5.0);
-            grabberL.setPosition(1);
+            grabberL.setPosition(0.3);
             rotator.setPower(0.1);
             sleep(500);
 

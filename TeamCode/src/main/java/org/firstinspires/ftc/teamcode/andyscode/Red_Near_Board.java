@@ -63,7 +63,7 @@ public class Red_Near_Board extends AutoCommon {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
-        grabberTilt.setPosition(0.2);
+        grabberTilt.setPosition(0.1);
         // Step 1:  Drive forward for 3 seconds
         String line = detectTeamPropLine("red near");
         visionPortal.close();
@@ -82,7 +82,7 @@ public class Red_Near_Board extends AutoCommon {
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.2,  -45,  -45, 5.0);
-            grabberL.setPosition(1);
+            grabberL.setPosition(0.3);
             rotator.setPower(0.1);
             sleep(500);
 
@@ -108,7 +108,7 @@ public class Red_Near_Board extends AutoCommon {
         else if (line.equals("right")) {
             encoderDrive(0.2,  4,  4, 5.0);
             turnToTargetYaw(-13+yaw0, 0.2, 5000);
-            encoderDrive(0.2,  24,  24, 5.0);
+            encoderDrive(0.2,  23,  23, 5.0);
 
             dropPixelOnLine();
             encoderDrive(0.2,  -4,  -4, 5.0);
@@ -119,7 +119,7 @@ public class Red_Near_Board extends AutoCommon {
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.2,  -40,  -40, 5.0);
-            grabberL.setPosition(1);
+            grabberL.setPosition(0.3);
             rotator.setPower(0.1);
             sleep(500);
 
@@ -175,7 +175,7 @@ public class Red_Near_Board extends AutoCommon {
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.2,  -40,  -40, 5.0);
-            grabberL.setPosition(1);
+            grabberL.setPosition(0.3);
             rotator.setPower(0.1);
             sleep(500);
 

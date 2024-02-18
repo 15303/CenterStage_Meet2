@@ -63,7 +63,7 @@ public class Blue_Far_Board extends AutoCommon {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
-        grabberTilt.setPosition(0.2);
+        grabberTilt.setPosition(0.1);
         // Step 1:  Drive forward for 3 seconds
         String line = detectTeamPropLine("blue far");
         visionPortal.close();
@@ -85,7 +85,7 @@ public class Blue_Far_Board extends AutoCommon {
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.5,  -60,  -60, 5.0);
-            grabberL.setPosition(1);
+            grabberL.setPosition(0.3);
             rotator.setPower(0.1);
             sleep(500);
             //shiftLeft(0.2, 2000);
@@ -124,7 +124,7 @@ public class Blue_Far_Board extends AutoCommon {
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.5,  -50,  -50, 5.0);
-            grabberL.setPosition(1);
+            grabberL.setPosition(0.3);
             rotator.setPower(0.1);
             sleep(500);
             //driveToLeftLine();
@@ -179,7 +179,7 @@ public class Blue_Far_Board extends AutoCommon {
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.5,  -50,  -50, 5.0);
-            grabberL.setPosition(1);
+            grabberL.setPosition(0.3);
             rotator.setPower(0.1);
             sleep(500);
             /*

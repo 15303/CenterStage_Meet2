@@ -65,7 +65,7 @@ public class Red_Far_Board extends AutoCommon {
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
 
         // Step 1:  Drive forward for 3 seconds
-        grabberTilt.setPosition(0.2);
+        grabberTilt.setPosition(0.1);
 
         String line = detectTeamPropLine("red far");
         //line = "left";
@@ -81,11 +81,11 @@ public class Red_Far_Board extends AutoCommon {
             turnToTargetYaw4(90+yaw0, 0.4, 5000);
             encoderDrive(0.5,   -80, -80, 4.0);
 
-            turnToTargetYaw4(60+yaw0, 0.4, 5000);
+            turnToTargetYaw4(55+yaw0, 0.4, 5000);
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.5,  -60,  -60, 5.0);
-            grabberL.setPosition(1);
+            grabberL.setPosition(0.3);
             rotator.setPower(0.1);
             sleep(500);
             //backward(0.2, 5000);
@@ -112,7 +112,7 @@ public class Red_Far_Board extends AutoCommon {
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.5,  -60,  -60, 5.0);
-            grabberL.setPosition(1);
+            grabberL.setPosition(0.3);
             rotator.setPower(0.1);
             sleep(500);
             //driveToLeftLine();
@@ -153,7 +153,7 @@ public class Red_Far_Board extends AutoCommon {
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.5,  -70,  -70, 5.0);
-            grabberL.setPosition(1);
+            grabberL.setPosition(0.3);
             rotator.setPower(0.1);
             sleep(500);
         }

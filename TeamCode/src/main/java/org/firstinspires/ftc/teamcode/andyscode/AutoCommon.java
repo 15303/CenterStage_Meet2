@@ -102,7 +102,7 @@ public abstract class AutoCommon extends LinearOpMode {
         grabberTilt = hardwareMap.get(Servo.class, "grabberTilt");
         grabberTilt.setPosition(1);
         grabberL = hardwareMap.get(Servo.class, "grabberL");
-        grabberL.setPosition(0.45);
+        grabberL.setPosition(0);
         grabberR = hardwareMap.get(Servo.class, "grabberR");
         grabberR.setPosition(0.6);
     }
@@ -446,7 +446,7 @@ public abstract class AutoCommon extends LinearOpMode {
         //grabberL.setPosition(0);
         sleep(1000);
         grabberTilt.setPosition(1);
-        sleep(250);
+        sleep(200);
         grabberR.setPosition(1);
         sleep(500);
         grabberTilt.setPosition(1);

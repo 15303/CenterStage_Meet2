@@ -31,6 +31,7 @@ package org.firstinspires.ftc.teamcode.andyscode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.opencsv.CSVReader;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import java.io.IOException;
@@ -58,6 +59,7 @@ import java.util.ArrayList;
  */
 
 @Autonomous(name=" TEST: Auto Log Replay", group="Robot")
+@Disabled
 public class AutoLogReplay extends AutoCommon {
 
     List<LogData> logDataList = new ArrayList<LogData>() ;

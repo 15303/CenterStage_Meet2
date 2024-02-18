@@ -80,7 +80,7 @@ public class Teleop extends LinearOpMode {
 
             // launcher
             if (gamepad1.y) {
-                launchServo.setPosition(0.5);
+                launchServo.setPosition(1.0);
             }
 
             if (gamepad1.x) {

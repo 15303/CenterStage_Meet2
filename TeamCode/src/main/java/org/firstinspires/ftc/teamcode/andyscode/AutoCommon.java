@@ -43,7 +43,7 @@ public abstract class AutoCommon extends LinearOpMode {
     protected static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
 
-    protected static final int RORATE_ARM_TICKS = 1200;
+    protected static final int RORATE_ARM_TICKS = 1500;
     // IMU control
     public IMU imu;
 
@@ -100,9 +100,10 @@ public abstract class AutoCommon extends LinearOpMode {
     }
     public void initServo() {
         grabberTilt = hardwareMap.get(Servo.class, "grabberTilt");
+        //up
         grabberTilt.setPosition(1);
         grabberL = hardwareMap.get(Servo.class, "grabberL");
-        grabberL.setPosition(0);
+        grabberL.setPosition(0.1);
         grabberR = hardwareMap.get(Servo.class, "grabberR");
         grabberR.setPosition(0.6);
     }

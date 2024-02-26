@@ -63,7 +63,7 @@ public class Blue_Far_Board extends AutoCommon {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
-        grabberTilt.setPosition(0.1);
+        grabberTilt.setPosition(0.12);
         // Step 1:  Drive forward for 3 seconds
         String line = detectTeamPropLine("blue far");
         visionPortal.close();
@@ -78,16 +78,16 @@ public class Blue_Far_Board extends AutoCommon {
             turnToTargetYaw(-20+yaw0, 0.4, 5000);
             encoderDrive(0.5,   50, 50, 4.0);
 
-            turnToTargetYaw4(-90+yaw0, 0.4, 5000);
+            turnToTargetYaw4(-90+yaw0, 0.4, 3000);
             encoderDrive(0.5,   -80, -80, 4.0);
 
-            turnToTargetYaw4(-60+yaw0, 0.4, 5000);
+            turnToTargetYaw4(-60+yaw0, 0.4, 3000);
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.5,  -60,  -60, 5.0);
             grabberL.setPosition(0.3);
             rotator.setPower(0.1);
-            sleep(500);
+            sleep(700);
             //shiftLeft(0.2, 2000);
             //turn(-0.5, 0.3,1260);
             //turnToTargetYaw(110+yaw0, 0.4, 5000);
@@ -117,16 +117,16 @@ public class Blue_Far_Board extends AutoCommon {
             //driveToRightLine();
             encoderDrive(0.5,  45,  45, 5.0);
             //turn(0.1, -0.5,1000);
-            turnToTargetYaw4(-90+yaw0, 1.0, 4000);
+            turnToTargetYaw4(-90+yaw0, 1.0, 3000);
             encoderDrive(0.5,  -80,  -80, 5.0);
-            turnToTargetYaw4(-60+yaw0, 1.0, 4000);
+            turnToTargetYaw4(-60+yaw0, 1.0, 3000);
 
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.5,  -50,  -50, 5.0);
             grabberL.setPosition(0.3);
             rotator.setPower(0.1);
-            sleep(500);
+            sleep(700);
             //driveToLeftLine();
             //backward(0.2, 2500);
             /*
@@ -172,16 +172,16 @@ public class Blue_Far_Board extends AutoCommon {
             //driveToRightLine();
             encoderDrive(0.5,  40,  40, 5.0);
             //turn(0.1, -0.5,1000);
-            turnToTargetYaw4(-90+yaw0, 1.0, 5000);
+            turnToTargetYaw4(-90+yaw0, 1.0, 3000);
             encoderDrive(0.5,  -80,  -80, 5.0);
-            turnToTargetYaw4(-60+yaw0, 1.0, 5000);
+            turnToTargetYaw4(-60+yaw0, 1.0, 3000);
 
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.5,  -50,  -50, 5.0);
             grabberL.setPosition(0.3);
             rotator.setPower(0.1);
-            sleep(500);
+            sleep(700);
             /*
             encoderDrive(0.3,  -4,  -4, 5.0);
             turnToTargetYaw(15+yaw0, 0.4, 5000);

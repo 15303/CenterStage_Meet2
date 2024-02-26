@@ -65,7 +65,7 @@ public class Red_Far_Board extends AutoCommon {
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
 
         // Step 1:  Drive forward for 3 seconds
-        grabberTilt.setPosition(0.1);
+        grabberTilt.setPosition(0.12);
 
         String line = detectTeamPropLine("red far");
         //line = "left";
@@ -78,16 +78,16 @@ public class Red_Far_Board extends AutoCommon {
             encoderDrive(0.4,  -5,  -5, 5.0);
             turnToTargetYaw4(25+yaw0, 0.4, 5000);
             encoderDrive(0.5,   35, 35, 4.0);
-            turnToTargetYaw4(90+yaw0, 0.4, 5000);
+            turnToTargetYaw4(90+yaw0, 0.4, 3000);
             encoderDrive(0.5,   -80, -80, 4.0);
 
-            turnToTargetYaw4(55+yaw0, 0.4, 5000);
+            turnToTargetYaw4(55+yaw0, 0.4, 3000);
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.5,  -60,  -60, 5.0);
             grabberL.setPosition(0.3);
             rotator.setPower(0.1);
-            sleep(500);
+            sleep(700);
             //backward(0.2, 5000);
             //dropPixelOnBoard();
         }
@@ -105,16 +105,16 @@ public class Red_Far_Board extends AutoCommon {
             //driveToRightLine();
             encoderDrive(0.5,  40,  40, 5.0);
             //turn(0.1, -0.5,1000);
-            turnToTargetYaw4(90+yaw0, 1.0, 4000);
+            turnToTargetYaw4(90+yaw0, 1.0, 3000);
             encoderDrive(0.5,  -70,  -70, 5.0);
-            turnToTargetYaw4(65+yaw0, 1.0, 4000);
+            turnToTargetYaw4(65+yaw0, 1.0, 3000);
 
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.5,  -60,  -60, 5.0);
             grabberL.setPosition(0.3);
             rotator.setPower(0.1);
-            sleep(500);
+            sleep(700);
             //driveToLeftLine();
 
             //turnToTargetYaw(yaw0, 0.4, 5000);
@@ -139,23 +139,23 @@ public class Red_Far_Board extends AutoCommon {
             turnToTargetYaw(-55+yaw0, 0.4, 5000);
             //encoderDrive(0.2,  38,  38, 5.0);
             //turnToTargetYaw2(-45+yaw0, 0.2, 5000);
-            encoderDrive(0.5,  2,  2, 5.0);
+            //encoderDrive(0.5,  1,  1, 5.0);
             dropPixelOnLine();
-            encoderDrive(0.5,  -10,  -10, 5.0);
+            encoderDrive(0.5,  -11,  -11, 5.0);
             turnToTargetYaw4(yaw0, 1.0, 5000);
             //driveToRightLine();
             encoderDrive(0.5,  35,  35, 5.0);
             //turn(0.1, -0.5,1000);
-            turnToTargetYaw4(90+yaw0, 1.0, 5000);
+            turnToTargetYaw4(90+yaw0, 1.0, 3000);
             encoderDrive(0.5,  -70,  -70, 5.0);
-            turnToTargetYaw4(60+yaw0, 1.0, 5000);
+            turnToTargetYaw4(60+yaw0, 1.0, 3000);
 
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.5,  -70,  -70, 5.0);
             grabberL.setPosition(0.3);
             rotator.setPower(0.1);
-            sleep(500);
+            sleep(700);
         }
 
         //visionPortal.close();

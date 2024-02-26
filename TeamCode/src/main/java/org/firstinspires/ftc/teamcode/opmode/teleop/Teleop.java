@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.opmode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -14,9 +15,7 @@ public class Teleop extends LinearOpMode {
     DcMotor backRightMotor = null;
     DcMotor rotator = null;
     DcMotor lifter = null;
-
-
-    Servo launchServo = null;
+    CRServo launchServo = null;
     Servo grabberTilt = null;
     Servo grabberR = null;
     Servo grabberL = null;
@@ -33,7 +32,7 @@ public class Teleop extends LinearOpMode {
         rotator = hardwareMap.dcMotor.get("rotator");
         lifter = hardwareMap.dcMotor.get("lifter");
 
-        launchServo = hardwareMap.servo.get("launcher");
+        launchServo = hardwareMap.crservo.get("launcher");
         grabberTilt = hardwareMap.servo.get("grabberTilt");
         grabberR = hardwareMap.servo.get("grabberR");
         grabberL = hardwareMap.servo.get("grabberL");
@@ -50,7 +49,13 @@ public class Teleop extends LinearOpMode {
         frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        launchServo.setPower(0);
         waitForStart();
+
+        frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         if (isStopRequested()) return;
 
@@ -80,7 +85,9 @@ public class Teleop extends LinearOpMode {
 
             // launcher
             if (gamepad1.y) {
-                launchServo.setPosition(1.0);
+                launchServo.setPower(1);
+                sleep(1000);
+                launchServo.setPower(0);
             }
 
             if (gamepad1.x) {
@@ -129,17 +136,21 @@ public class Teleop extends LinearOpMode {
             // grabber
             if (gamepad2.left_bumper) {
                 //grabberL.setPosition(1);
-                grabberL.setPosition(0.5);
+                //open
+                grabberL.setPosition(0.4);
             }
             if (gamepad2.left_trigger > 0.3) {
                 //grabberL.setPosition(0.6);
-                grabberL.setPosition(0);
+                //close
+                grabberL.setPosition(0.2);
             }
 
             if (gamepad2.right_bumper) {
+                //open
                 grabberR.setPosition(0);
             }
             if (gamepad2.right_trigger > 0.3) {
+                //close
                 grabberR.setPosition(0.5);
             }
 

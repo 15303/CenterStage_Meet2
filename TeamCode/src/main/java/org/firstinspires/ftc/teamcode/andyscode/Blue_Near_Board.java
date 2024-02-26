@@ -75,15 +75,16 @@ public class Blue_Near_Board extends AutoCommon {
         telemetry.addData("Status", "Ready to run");    //
         telemetry.update();
         // Wait for the game to start (driver presses PLAY)
-        waitForStart();
-        // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
 
-        // Step 1:  Drive forward for 3 seconds
-        grabberTilt.setPosition(0.1);
+        waitForStart();
+
+        grabberTilt.setPosition(0.12);
 
         String line = detectTeamPropLine("blue near");
         //line = "middle";
         visionPortal.close();
+        telemetry.addData("Position: ", line);
+        telemetry.update();
         if (line.equals("middle")) {
 
             /*
@@ -105,7 +106,7 @@ public class Blue_Near_Board extends AutoCommon {
             encoderDrive(0.2,  -40,  -40, 5.0);
             grabberL.setPosition(0.3);
             rotator.setPower(0.1);
-            sleep(500);
+            sleep(700);
 
             RotateArm(-RORATE_ARM_TICKS, 1.0, 4000);
             strafe(-0.4,1500);
@@ -114,7 +115,7 @@ public class Blue_Near_Board extends AutoCommon {
 
             encoderDrive(0.2,  4,  4, 5.0);
             turnToTargetYaw(15+yaw0, 0.2, 5000);
-            encoderDrive(0.2,  26,  26, 5.0);
+            encoderDrive(0.2,  24,  24, 5.0);
 
             //encoderDrive(0.2,  30,  30, 5.0);
             //turnToTargetYaw(40+yaw0, 0.2, 5000);
@@ -123,15 +124,16 @@ public class Blue_Near_Board extends AutoCommon {
             //strafe(0.4,500);
             //encoderDrive(0.2,  10,  10, 5.0);
 
-            turnToTargetYaw2(-98+yaw0, 1, 5000);
+            turnToTargetYaw2(-102+yaw0, 1, 5000);
             encoderDrive(0.2,  -10,  -10, 5.0);
 
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
             encoderDrive(0.2,  -40,  -40, 5.0);
-            grabberL.setPosition(0.3);
+            //grabberTilt.setPosition(0.8);
+            grabberL.setPosition(0.4);
             rotator.setPower(0.1);
-            sleep(500);
+            sleep(700);
 
             RotateArm(-RORATE_ARM_TICKS, 1.0, 4000);
             strafe(-0.4,1500);
@@ -159,7 +161,7 @@ public class Blue_Near_Board extends AutoCommon {
             turnToTargetYaw(-35+yaw0, 0.2, 5000);
             //encoderDrive(0.2,  38,  38, 5.0);
             //turnToTargetYaw2(-45+yaw0, 0.2, 5000);
-            encoderDrive(0.2,  2,  2, 5.0);
+            encoderDrive(0.2,  4,  4, 5.0);
             dropPixelOnLine();
             encoderDrive(0.4,  -10,  -10, 5.0);
             /*
@@ -169,7 +171,7 @@ public class Blue_Near_Board extends AutoCommon {
 
              */
 
-            turnToTargetYaw2(-125+yaw0, 0.8, 6000);
+            turnToTargetYaw2(-127+yaw0, 0.8, 6000);
             encoderDrive(0.4,  -10,  -10, 5.0);
 
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
@@ -177,7 +179,7 @@ public class Blue_Near_Board extends AutoCommon {
             encoderDrive(0.2,  -40,  -40, 5.0);
             grabberL.setPosition(0.3);
             rotator.setPower(0.1);
-            sleep(500);
+            sleep(700);
 
             RotateArm(-RORATE_ARM_TICKS, 1.0, 4000);
             strafe(0.4,2000);

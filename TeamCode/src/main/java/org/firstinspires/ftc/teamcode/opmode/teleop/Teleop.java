@@ -6,19 +6,39 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.arcrobotics.ftclib.controller.PIDController;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+
+import org.firstinspires.ftc.teamcode.common.hardware.BotCoefficients;
 
 @TeleOp
 public class Teleop extends LinearOpMode {
+    private PIDController controller;
     DcMotor frontLeftMotor = null;
     DcMotor backLeftMotor = null;
     DcMotor frontRightMotor = null;
     DcMotor backRightMotor = null;
     DcMotor rotator = null;
     DcMotor lifter = null;
+
+
     CRServo launchServo = null;
     Servo grabberTilt = null;
     Servo grabberR = null;
     Servo grabberL = null;
+
+    public static double p = 0.004, i = 0, d = 0.00003;
+    public static double f = 0.005;
+
+    public static int target = 0;
+
+    private final double ticks_in_degree = 700 / 180.0;
 
 
     @Override
@@ -42,27 +62,29 @@ public class Teleop extends LinearOpMode {
         rotator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rotator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        boolean leftGrabberOpen = false;
-        boolean rightGrabberOpen = false;
-        long timeBegin, timeCurrent;
+
 
         frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        launchServo.setPower(0);
-        waitForStart();
-
         frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
+        controller = new PIDController(p, i, d);
+        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
+
+        launchServo.setPower(0);
+        waitForStart();
 
         if (isStopRequested()) return;
 
 
         while (opModeIsActive()) {
-            double vertical = gamepad1.left_stick_y;        // Remember, Y stick value is reversed
-            double horizontal = gamepad1.left_stick_x;      // Counteract imperfect strafing
+            double vertical = gamepad1.left_stick_y;
+            double horizontal = gamepad1.left_stick_x;
             double turn = -gamepad1.right_stick_x;
 
             double denominator = Math.max(Math.abs(vertical) + Math.abs(horizontal) + Math.abs(turn), 1);
@@ -71,14 +93,13 @@ public class Teleop extends LinearOpMode {
             double backLeftPower = (vertical - horizontal + turn) / denominator;
             double backRightPower = (vertical + horizontal - turn) / denominator;
 
-            // robot.setDrivePower(vertical+turn-horizontal,vertical-turn+horizontal,vertical+turn+horizontal,vertical-turn-horizontal);
-            // fl, fr, bl, br
             frontLeftMotor.setPower(frontLeftPower);
             frontRightMotor.setPower(frontRightPower);
             backLeftMotor.setPower(backLeftPower);
             backRightMotor.setPower(backRightPower);
 
-
+            telemetry.addData("pos", rotator.getCurrentPosition());
+            telemetry.update();
             //
             // Game Pad #1
             //
@@ -90,81 +111,54 @@ public class Teleop extends LinearOpMode {
                 launchServo.setPower(0);
             }
 
-            if (gamepad1.x) {
-                grabberL.setPosition(0);
-                grabberR.setPosition(0.5);
-                RotateArm(1500, 1.0, 2000);
-                //sleep(200);
-                //encoderDrive(0.2,  -40,  -40, 5.0);
-                frontLeftMotor.setPower(0.3);
-                frontRightMotor.setPower(0.3);
-                backLeftMotor.setPower(0.3);
-                backRightMotor.setPower(0.3);
-
-                sleep(2000);
-                frontLeftMotor.setPower(0);
-                frontRightMotor.setPower(0);
-                backLeftMotor.setPower(0);
-                backRightMotor.setPower(0);
-
-                grabberL.setPosition(0.5);
-                grabberR.setPosition(0);
-                rotator.setPower(0.1);
-                sleep(800);
-
-                grabberL.setPosition(0);
-                grabberR.setPosition(0.5);
-
-                RotateArm(-1500, 1.0, 4000);
-
-            }
-
             //
             // Game Pad #2
 
             // grabber tilt
             if (gamepad2.dpad_down) {       // put down grabbers
-                grabberTilt.setPosition(0.1);
-
+                // down
+                grabberTilt.setPosition(BotCoefficients.grabberDown);
             }
             else if (gamepad2.dpad_up) {    // pull up grabbers
-                grabberL.setPosition(0);
-                grabberR.setPosition(0.5);
-                grabberTilt.setPosition(1.0);
+                //up
+                grabberTilt.setPosition(BotCoefficients.grabberUp);
             }
 
             // grabber
             if (gamepad2.left_bumper) {
-                //grabberL.setPosition(1);
-                //open
-                grabberL.setPosition(0.4);
+                // open
+                grabberL.setPosition(BotCoefficients.grabberLeftOpen);
             }
             if (gamepad2.left_trigger > 0.3) {
-                //grabberL.setPosition(0.6);
                 //close
-                grabberL.setPosition(0.2);
+                grabberL.setPosition(BotCoefficients.grabberLeftClose);
             }
 
             if (gamepad2.right_bumper) {
-                //open
-                grabberR.setPosition(0);
+                // open
+                grabberR.setPosition(BotCoefficients.grabberRightOpen);
             }
             if (gamepad2.right_trigger > 0.3) {
-                //close
-                grabberR.setPosition(0.5);
+                // close
+                grabberR.setPosition(BotCoefficients.grabberRightClose);
             }
 
 
             // arm rotation
-
             if (gamepad2.a){
-                RotateArm(-200, 1.0, 200);
-                rotator.setPower(0.1);
+                target = BotCoefficients.armDown;
             }
             else if(gamepad2.b){
-                RotateArm(200, 1.0, 200);
-                rotator.setPower(0.1);
+                target = BotCoefficients.armUp;
             }
+
+            controller.setPID(p, i, d);
+            int armPos = rotator.getCurrentPosition();
+            double pid = controller.calculate(armPos, target);
+            double ff = Math.cos(Math.toRadians(target / ticks_in_degree)) * f;
+
+            double power = pid + ff;
+            rotator.setPower(power);
 
             // actuator extension and retraction
             if (gamepad2.x){
@@ -179,19 +173,4 @@ public class Teleop extends LinearOpMode {
         }
     }
 
-    void RotateArm(int ticks, double power, long timeOutMills) {
-        long timeCurrent, timeBegin;
-        timeBegin = timeCurrent = System.currentTimeMillis();
-
-        rotator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rotator.setTargetPosition(ticks);
-        rotator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rotator.setPower(power);
-        while(opModeIsActive()
-                && rotator.isBusy()
-                && (timeCurrent - timeBegin) < timeOutMills) {
-            timeCurrent = System.currentTimeMillis();
-        }
-        rotator.setPower(0 * power);
-    }
 }

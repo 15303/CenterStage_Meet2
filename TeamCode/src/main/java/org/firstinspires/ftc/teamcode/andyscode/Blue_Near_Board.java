@@ -78,7 +78,7 @@ public class Blue_Near_Board extends AutoCommon {
 
         waitForStart();
 
-        grabberTilt.setPosition(0.12);
+        grabberTilt.setPosition(TILT_INIT_POSITION);
 
         String line = detectTeamPropLine("blue near");
         //line = "middle";

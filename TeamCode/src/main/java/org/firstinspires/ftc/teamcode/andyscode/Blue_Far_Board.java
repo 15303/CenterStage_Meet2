@@ -63,7 +63,7 @@ public class Blue_Far_Board extends AutoCommon {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
-        grabberTilt.setPosition(0.12);
+        grabberTilt.setPosition(TILT_INIT_POSITION);
         // Step 1:  Drive forward for 3 seconds
         String line = detectTeamPropLine("blue far");
         visionPortal.close();

@@ -44,6 +44,7 @@ public abstract class AutoCommon extends LinearOpMode {
             (WHEEL_DIAMETER_INCHES * 3.1415);
 
     protected static final int RORATE_ARM_TICKS = 1500;
+    protected static final double TILT_INIT_POSITION = 0.12;
     // IMU control
     public IMU imu;
 

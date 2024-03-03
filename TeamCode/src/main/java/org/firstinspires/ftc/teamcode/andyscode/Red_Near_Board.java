@@ -70,7 +70,7 @@ public class Red_Near_Board extends AutoCommon {
             line = detectTeamPropLine("red near");
             telemetry.update();
         }
-        grabberTilt.setPosition(0.12);
+        grabberTilt.setPosition(TILT_INIT_POSITION);
         visionPortal.close();
         //line = "left";
 

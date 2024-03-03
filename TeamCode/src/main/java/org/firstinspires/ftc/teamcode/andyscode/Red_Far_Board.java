@@ -65,7 +65,7 @@ public class Red_Far_Board extends AutoCommon {
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
 
         // Step 1:  Drive forward for 3 seconds
-        grabberTilt.setPosition(0.12);
+        grabberTilt.setPosition(TILT_INIT_POSITION);
 
         String line = detectTeamPropLine("red far");
         //line = "left";

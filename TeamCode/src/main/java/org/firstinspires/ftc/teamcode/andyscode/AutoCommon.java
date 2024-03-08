@@ -20,6 +20,7 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
+import org.firstinspires.ftc.teamcode.common.hardware.BotCoefficients;
 
 public abstract class AutoCommon extends LinearOpMode {
 
@@ -44,7 +45,7 @@ public abstract class AutoCommon extends LinearOpMode {
             (WHEEL_DIAMETER_INCHES * 3.1415);
 
     protected static final int RORATE_ARM_TICKS = 1500;
-    protected static final double TILT_INIT_POSITION = 0.12;
+    protected static final double TILT_INIT_POSITION = 0.75;
     // IMU control
     public IMU imu;
 
@@ -102,11 +103,13 @@ public abstract class AutoCommon extends LinearOpMode {
     public void initServo() {
         grabberTilt = hardwareMap.get(Servo.class, "grabberTilt");
         //up
-        grabberTilt.setPosition(1);
         grabberL = hardwareMap.get(Servo.class, "grabberL");
-        grabberL.setPosition(0.1);
+        grabberL.setPosition(BotCoefficients.grabberLeftClose);
         grabberR = hardwareMap.get(Servo.class, "grabberR");
-        grabberR.setPosition(0.6);
+        grabberR.setPosition(BotCoefficients.grabberRightClose);
+        sleep(1000);
+        //grabberTilt.setPosition(BotCoefficients.grabberUp);
+        grabberTilt.setPosition(0.1);
     }
 
     public void initArm() {
@@ -444,14 +447,16 @@ public abstract class AutoCommon extends LinearOpMode {
 
     }
     public void dropPixelOnLine() {
-        grabberR.setPosition(0);
+        grabberR.setPosition(BotCoefficients.grabberRightOpen);
         //grabberL.setPosition(0);
-        sleep(1000);
-        grabberTilt.setPosition(1);
-        sleep(200);
-        grabberR.setPosition(1);
+        //sleep(1000);
+        //grabberTilt.setPosition(1);
         sleep(500);
-        grabberTilt.setPosition(1);
+        grabberTilt.setPosition(0.6);
+        sleep(500);
+        grabberR.setPosition(BotCoefficients.grabberRightClose);
+        sleep(500);
+        grabberTilt.setPosition(BotCoefficients.grabberUp);
         sleep(250);
 
     }
@@ -669,22 +674,14 @@ public abstract class AutoCommon extends LinearOpMode {
                 factor = 1.0;
             else
                 factor = diffYaw / 3;
-            if (targetYawDegree<0) {
+
                 driveMotors(
-                        (int) (tickDirection * ticks * 0.1),
-                        (int) (tickDirection * ticks * 0.1),
+                        (int) (tickDirection * ticks ),
+                        (int) (tickDirection * ticks ),
                         -(int) (tickDirection * ticks),
                         -(int) (tickDirection * ticks),
                         power * factor, false, 0);
-            }
-            else {
-                driveMotors(
-                        (int) (tickDirection * ticks),
-                        (int) (tickDirection * ticks),
-                        -(int) (tickDirection * ticks * 0.1),
-                        -(int) (tickDirection * ticks * 0.1),
-                        power * factor, false, 0);
-            }
+
             currentYaw = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
             timeCurrent = System.currentTimeMillis();
             diffYaw = Math.abs(currentYaw - targetYawDegree);

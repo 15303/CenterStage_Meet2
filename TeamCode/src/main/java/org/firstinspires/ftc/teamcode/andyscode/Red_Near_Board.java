@@ -31,6 +31,8 @@ package org.firstinspires.ftc.teamcode.andyscode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import org.firstinspires.ftc.teamcode.common.hardware.BotCoefficients;
+
 /*
  * This OpMode illustrates the concept of driving a path based on time.
  * The code is structured as a LinearOpMode
@@ -80,37 +82,38 @@ public class Red_Near_Board extends AutoCommon {
             //encoderDrive(0.2,  26,  26, 5.0);
             //strafe(0.2, 1000);
             dropPixelOnLine();
-            encoderDrive(0.2,  -3,  -3, 5.0);
+            encoderDrive(0.3,  -1,  -1, 5.0);
+            strafe(-0.3, 1800);
+            encoderDrive(0.3,  6,  6, 5.0);
 
-            turnToTargetYaw4(100+yaw0, 1.0, 6000);
-            encoderDrive(0.2,  -10,  -10, 5.0);
-            RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
+            turnToTargetYaw2(90+yaw0, 1.0, 7000);
+            //encoderDrive(0.2,  -10,  -10, 5.0);
+            RotateArm(RORATE_ARM_TICKS, 1.0, 2000);
             //rotator.setPower(0.1);
-            encoderDrive(0.2,  -45,  -45, 5.0);
-            grabberL.setPosition(0.4);
-            rotator.setPower(0.1);
-            sleep(700);
+            encoderDrive(0.2,  -35,  -35, 5.0);
+            grabberL.setPosition(BotCoefficients.grabberLeftOpen);
 
-            RotateArm(-RORATE_ARM_TICKS, 1.0, 4000);
-            strafe(0.4,2000);
-            //driveToMiddleLine();
-            //encoderDrive(0.1,  34,  34, 5.0);
-            //dropPixelOnLine();
-            //forward(0.2, 1000);
-            //encoderDrive(0.2,   -9, -9, 4.0);
-            //encoderDrive(1,   -5, 5, 4.0);
-            //shiftLeft(0.2, 2000);
-            //turn(-0.5, 0.3,1260);
-            //turnToTargetYaw(-80+yaw0, 0.4, 5000);
-            //encoderDrive(0.2,  15,  15, 5.0);
-            //turnToTargetYaw(-90+yaw0, 0.4, 5000);
-            //encoderDrive(0.5,   , -6, 4.0);
-            //driveToBackBoardNearSide(2);
-            //encoderDrive(0.2,  -50,  -50, 5.0);
-            //backward(0.2, 5000);
-            //dropPixelOnBoard();
+            sleep(1000);
+
+            RotateArm(-RORATE_ARM_TICKS, 1.0, 2000);
+            strafe(0.4,2200);
+
         }
         else if (line.equals("right")) {
+            encoderDrive(0.2,  28,  28, 5.0);
+            strafe(-0.3,700);
+            dropPixelOnLine();
+            encoderDrive(0.3,  -2,  -2, 5.0);
+            strafe(-0.3,1500);
+            encoderDrive(0.3,  -2,  -2, 5.0);
+            turnToTargetYaw2(90+yaw0, 1, 7000);
+            RotateArm(RORATE_ARM_TICKS, 1.0, 2000);
+            encoderDrive(0.2,  -25,  -25, 5.0);
+            grabberL.setPosition(BotCoefficients.grabberLeftOpen);
+            sleep(1000);
+            RotateArm(-RORATE_ARM_TICKS, 1.0, 2000);
+            strafe(0.4,1800);
+            /*
             encoderDrive(0.2,  4,  4, 5.0);
             turnToTargetYaw(-13+yaw0, 0.2, 5000);
             encoderDrive(0.2,  23,  23, 5.0);
@@ -130,35 +133,23 @@ public class Red_Near_Board extends AutoCommon {
 
             RotateArm(-RORATE_ARM_TICKS, 1.0, 4000);
             strafe(0.4,2000);
-            //driveToLeftLine();
-            //driveToLeftLine();
-            //backward(0.2, 2500);
-            /*
-            encoderDrive(0.2,  -4,  -4, 5.0);
-            turnToTargetYaw(-18+yaw0, 0.4, 5000);
-            encoderDrive(0.2,  -30,  -30, 5.0);
-            encoderDrive(0.2,  13,  13, 5.0);
-            turnToTargetYaw(-90+yaw0, 0.4, 5000);
-            encoderDrive(0.2,  -48,  -48, 5.0);
 
              */
-            //turnToTargetYaw(yaw0, 0.4, 5000);
-            //encoderDrive(0.2,  -25,  -25, 5.0);
-            //turnToTargetYaw(50+yaw0, 0.4, 5000);
-            //turn(-0.2, 0.2,800);
-            //encoderDrive(0.2,  -10,  -10, 5.0);
-            //sleep(100);
-            //encoderDrive(0.2,  13,  13, 5.0);
-            //turnToTargetYaw(90+yaw0, 0.4, 5000);
-            //dropPixelOnLine();
-            //forward(0.2, 800);
-            //turn(-0.5, 0.3, 1000);
-            //driveToBackBoardNearSide(1);
-            //backward(0.2, 4500);
-            //encoderDrive(0.2,  -48,-48, 5.0);
-            //dropPixelOnBoard();
         }
         else {
+            encoderDrive(0.3,  28,  28, 5.0);
+            strafe(0.3,1400);
+            dropPixelOnLine();
+            strafe(-0.3,2500);
+            encoderDrive(0.3,  10,  10, 5.0);
+            turnToTargetYaw2(90+yaw0, 1, 3000);
+            RotateArm(RORATE_ARM_TICKS, 1.0, 2000);
+            encoderDrive(0.2,  -40,  -40, 5.0);
+            grabberL.setPosition(BotCoefficients.grabberLeftOpen);
+            sleep(1000);
+            RotateArm(-RORATE_ARM_TICKS, 1.0, 2000);
+            strafe(0.4,3200);
+            /*
             //driveToRightLine();
             encoderDrive(0.2,  26,  26, 5.0);
             turnToTargetYaw(45+yaw0, 0.2, 5000);
@@ -167,12 +158,6 @@ public class Red_Near_Board extends AutoCommon {
             encoderDrive(0.2,  4,  4, 5.0);
             dropPixelOnLine();
             encoderDrive(0.4,  -12,  -12, 5.0);
-            /*
-            encoderDrive(0.4,  -14,  -14, 5.0);
-            turnToTargetYaw(yaw0, 0.8, 5000);
-            encoderDrive(0.4,  32,  32, 5.0);
-
-             */
 
             turnToTargetYaw4(115+yaw0, 1.0, 8000);
             encoderDrive(0.4,  -10,  -10, 5.0);
@@ -186,6 +171,8 @@ public class Red_Near_Board extends AutoCommon {
 
             RotateArm(-RORATE_ARM_TICKS, 1.0, 4000);
             strafe(-0.4,2000);
+
+             */
         }
 
         //visionPortal.close();

@@ -31,6 +31,8 @@ package org.firstinspires.ftc.teamcode.andyscode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import org.firstinspires.ftc.teamcode.common.hardware.BotCoefficients;
+
 /*
  * This OpMode illustrates the concept of driving a path based on time.
  * The code is structured as a LinearOpMode
@@ -73,89 +75,79 @@ public class Red_Far_Board extends AutoCommon {
         if (line.equals("middle")) {
             //driveToMiddleLine();
             encoderDrive(0.2,  31,  31, 5.0);
-            //strafe(0.2, 1000);
             dropPixelOnLine();
-            encoderDrive(0.4,  -5,  -5, 5.0);
-            turnToTargetYaw4(25+yaw0, 0.4, 5000);
-            encoderDrive(0.5,   35, 35, 4.0);
-            turnToTargetYaw4(90+yaw0, 0.4, 3000);
+            encoderDrive(0.2,  -2,  -2, 5.0);
+            strafe(0.3, 1000);
+            encoderDrive(0.3,  22,  22, 5.0);
+            //turnToTargetYaw4(25+yaw0, 0.4, 5000);
+            //encoderDrive(0.5,   35, 35, 4.0);
+            turnToTargetYaw2(90+yaw0, 0.4, 3000);
             encoderDrive(0.5,   -80, -80, 4.0);
 
-            turnToTargetYaw4(55+yaw0, 0.4, 3000);
-            RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
+            turnToTargetYaw2(70+yaw0, 0.4, 3000);
+            RotateArm(RORATE_ARM_TICKS, 1.0, 3000);
             //rotator.setPower(0.1);
-            encoderDrive(0.5,  -60,  -60, 5.0);
-            grabberL.setPosition(0.3);
-            rotator.setPower(0.1);
-            sleep(700);
+            encoderDrive(0.3,  -65,  -65, 5.0);
+            grabberL.setPosition(BotCoefficients.grabberLeftOpen);
+            //rotator.setPower(0.1);
+            sleep(1000);
             //backward(0.2, 5000);
             //dropPixelOnBoard();
         }
         else if (line.equals("left")) {
-            //driveToLeftLine();
-            //backward(0.2, 2500);
-            encoderDrive(0.2,  27,  27, 5.0);
-            turnToTargetYaw(30+yaw0, 0.2, 5000);
-            //encoderDrive(0.2,  22,  22, 5.0);
+
+            encoderDrive(0.2,  28,  28, 5.0);
+            strafe(0.3,1000);
+            //turnToTargetYaw(30+yaw0, 0.2, 5000);
 
             dropPixelOnLine();
-            encoderDrive(0.5,  -12,  -12, 5.0);
+            encoderDrive(0.3,  -2,  -2, 5.0);
+            strafe(-0.3,1600);
+            encoderDrive(0.3,  23,  23, 5.0);
 
-            turnToTargetYaw4(yaw0, 1.0, 4000);
-            //driveToRightLine();
-            encoderDrive(0.5,  40,  40, 5.0);
+            //turnToTargetYaw4(yaw0, 1.0, 4000);
+
+            //encoderDrive(0.5,  40,  40, 5.0);
             //turn(0.1, -0.5,1000);
-            turnToTargetYaw4(90+yaw0, 1.0, 3000);
+            turnToTargetYaw2(90+yaw0, 1.0, 3000);
             encoderDrive(0.5,  -70,  -70, 5.0);
-            turnToTargetYaw4(65+yaw0, 1.0, 3000);
+            turnToTargetYaw2(75+yaw0, 1.0, 3000);
 
             RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
             //rotator.setPower(0.1);
-            encoderDrive(0.5,  -60,  -60, 5.0);
-            grabberL.setPosition(0.3);
-            rotator.setPower(0.1);
-            sleep(700);
-            //driveToLeftLine();
+            encoderDrive(0.3,  -60,  -60, 5.0);
+            grabberL.setPosition(BotCoefficients.grabberLeftOpen);
+            //rotator.setPower(0.1);
+            sleep(1000);
 
-            //turnToTargetYaw(yaw0, 0.4, 5000);
-            //encoderDrive(0.2,  -25,  -25, 5.0);
-            //turnToTargetYaw(50+yaw0, 0.4, 5000);
-            //turn(-0.2, 0.2,800);
-            //encoderDrive(0.2,  -10,  -10, 5.0);
-            //sleep(100);
-            //encoderDrive(0.2,  13,  13, 5.0);
-            //turnToTargetYaw(90+yaw0, 0.4, 5000);
-            //dropPixelOnLine();
-            //forward(0.2, 800);
-            //turn(-0.5, 0.3, 1000);
-            //driveToBackBoardNearSide(1);
-            //backward(0.2, 4500);
-            //encoderDrive(0.2,  -48,-48, 5.0);
-            //dropPixelOnBoard();
         }
         else {
-            //driveToRightLine();
-            encoderDrive(0.3,  26,  26, 5.0);
-            turnToTargetYaw(-55+yaw0, 0.4, 5000);
-            //encoderDrive(0.2,  38,  38, 5.0);
-            //turnToTargetYaw2(-45+yaw0, 0.2, 5000);
-            //encoderDrive(0.5,  1,  1, 5.0);
-            dropPixelOnLine();
-            encoderDrive(0.5,  -11,  -11, 5.0);
-            turnToTargetYaw4(yaw0, 1.0, 5000);
-            //driveToRightLine();
-            encoderDrive(0.5,  35,  35, 5.0);
-            //turn(0.1, -0.5,1000);
-            turnToTargetYaw4(90+yaw0, 1.0, 3000);
-            encoderDrive(0.5,  -70,  -70, 5.0);
-            turnToTargetYaw4(60+yaw0, 1.0, 3000);
 
-            RotateArm(RORATE_ARM_TICKS, 1.0, 4000);
-            //rotator.setPower(0.1);
+            encoderDrive(0.3,  28,  28, 5.0);
+            //turnToTargetYaw(-55+yaw0, 0.4, 5000);
+            strafe(-0.3,1300);
+            dropPixelOnLine();
+            strafe(0.3,1600);
+
+            encoderDrive(0.3,  24,  24, 5.0);
+            //turnToTargetYaw4(yaw0, 1.0, 5000);
+            //driveToRightLine();
+            //encoderDrive(0.5,  35,  35, 5.0);
+            //turn(0.1, -0.5,1000);
+            turnToTargetYaw2(90+yaw0, 1.0, 4000);
+            //encoderDrive(0.5,  -100,  -100, 5.0);
             encoderDrive(0.5,  -70,  -70, 5.0);
-            grabberL.setPosition(0.3);
-            rotator.setPower(0.1);
-            sleep(700);
+            //sleep(500);
+            turnToTargetYaw2(60+yaw0, 1.0, 4000);
+            //strafe(0.3,1300);
+            //strafe(0.3,1200);
+
+            RotateArm(RORATE_ARM_TICKS, 1.0, 2000);
+            //rotator.setPower(0.1);
+            encoderDrive(0.3,  -60,  -60, 5.0);
+            grabberL.setPosition(BotCoefficients.grabberLeftOpen);
+            //rotator.setPower(0.1);
+            sleep(1000);
         }
 
         //visionPortal.close();

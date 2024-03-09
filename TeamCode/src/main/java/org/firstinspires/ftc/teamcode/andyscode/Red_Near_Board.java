@@ -83,8 +83,9 @@ public class Red_Near_Board extends AutoCommon {
             //strafe(0.2, 1000);
             dropPixelOnLine();
             encoderDrive(0.3,  -1,  -1, 5.0);
-            strafe(-0.3, 1800);
-            encoderDrive(0.3,  6,  6, 5.0);
+            //strafe(-0.3, 1800);
+            strafe_encoder(0.3, 20, 20, 5.0);
+            encoderDrive(0.3,  5,  5, 5.0);
 
             turnToTargetYaw2(90+yaw0, 1.0, 7000);
             //encoderDrive(0.2,  -10,  -10, 5.0);
@@ -101,14 +102,16 @@ public class Red_Near_Board extends AutoCommon {
         }
         else if (line.equals("right")) {
             encoderDrive(0.2,  28,  28, 5.0);
-            strafe(-0.3,700);
+            //strafe(-0.3,700);
+            strafe_encoder(0.3, 8, 8, 5.0);
             dropPixelOnLine();
             encoderDrive(0.3,  -2,  -2, 5.0);
-            strafe(-0.3,1500);
+            //strafe(-0.3,1500);
+            strafe_encoder(0.3, 8, 8, 5.0);
             encoderDrive(0.3,  -2,  -2, 5.0);
             turnToTargetYaw2(90+yaw0, 1, 7000);
             RotateArm(RORATE_ARM_TICKS, 1.0, 2000);
-            encoderDrive(0.2,  -25,  -25, 5.0);
+            encoderDrive(0.2,  -35,  -35, 5.0);
             grabberL.setPosition(BotCoefficients.grabberLeftOpen);
             sleep(1000);
             RotateArm(-RORATE_ARM_TICKS, 1.0, 2000);
@@ -138,10 +141,12 @@ public class Red_Near_Board extends AutoCommon {
         }
         else {
             encoderDrive(0.3,  28,  28, 5.0);
-            strafe(0.3,1400);
+            //strafe(0.3,1400);
+            strafe_encoder(0.3, -20, -20, 5.0);
             dropPixelOnLine();
-            strafe(-0.3,2500);
-            encoderDrive(0.3,  10,  10, 5.0);
+            //strafe(-0.3,2500);
+            strafe_encoder(0.3, 30, 30, 5.0);
+            encoderDrive(0.3,  12,  12, 5.0);
             turnToTargetYaw2(90+yaw0, 1, 3000);
             RotateArm(RORATE_ARM_TICKS, 1.0, 2000);
             encoderDrive(0.2,  -40,  -40, 5.0);

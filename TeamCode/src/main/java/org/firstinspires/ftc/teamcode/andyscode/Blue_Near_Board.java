@@ -92,7 +92,8 @@ public class Blue_Near_Board extends AutoCommon {
             dropPixelOnLine();
 
             encoderDrive(0.2,  -4,  -4, 5.0);
-            strafe(0.3,1000);
+            //strafe(0.3,1000);
+            strafe_encoder(0.3, -10, -10, 5.0);
 
             turnToTargetYaw2(-90+yaw0, 1.0, 4000);
             encoderDrive(0.2,  -10,  -10, 5.0);
@@ -109,7 +110,8 @@ public class Blue_Near_Board extends AutoCommon {
         else if (line.equals("left")) {
 
             encoderDrive(0.2,  28,  28, 5.0);
-            strafe(0.3,1300);
+            //strafe(0.3,1300);
+            strafe_encoder(0.3, -15, -15, 5.0);
             dropPixelOnLine();
             encoderDrive(0.2,  -10,  -10, 5.0);
             turnToTargetYaw2(-90+yaw0, 1, 3000);
@@ -146,9 +148,11 @@ public class Blue_Near_Board extends AutoCommon {
         }
         else {
             encoderDrive(0.3,  29,  29, 5.0);
-            strafe(-0.3,1200);
+            //strafe(-0.3,1200);
+            strafe_encoder(0.3, 15, 15, 5.0);
             dropPixelOnLine();
-            strafe(0.3,1500);
+            //strafe(0.3,1500);
+            strafe_encoder(0.3, -18, -18, 5.0);
             encoderDrive(0.3,  5,  5, 5.0);
             turnToTargetYaw2(-90+yaw0, 1, 3000);
             RotateArm(RORATE_ARM_TICKS, 1.0, 2000);

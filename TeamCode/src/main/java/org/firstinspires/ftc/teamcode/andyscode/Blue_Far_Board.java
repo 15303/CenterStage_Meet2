@@ -77,7 +77,8 @@ public class Blue_Far_Board extends AutoCommon {
             //strafe(0.2, 1000);
             dropPixelOnLine();
             encoderDrive(0.2,  -2,  -2, 5.0);
-            strafe(-0.3, 1200);
+            //strafe(-0.3, 1200);
+            strafe_encoder(0.3, 17, 17, 5.0);
             encoderDrive(0.3,  27,  27, 5.0);
             //encoderDrive(0.4,  -15,  -15, 5.0);
             //turnToTargetYaw(-20+yaw0, 0.4, 5000);
@@ -86,30 +87,33 @@ public class Blue_Far_Board extends AutoCommon {
             turnToTargetYaw2(-90+yaw0, 0.4, 4000);
             encoderDrive(0.5,   -80, -80, 4.0);
 
-            turnToTargetYaw2(-60+yaw0, 0.4, 4000);
+            turnToTargetYaw2(-62+yaw0, 0.4, 4000);
             RotateArm(RORATE_ARM_TICKS, 1.0, 2000);
             //rotator.setPower(0.1);
             encoderDrive(0.3,  -60,  -60, 5.0);
             grabberL.setPosition(BotCoefficients.grabberLeftOpen);
             //rotator.setPower(0.1);
             sleep(1000);
+            RotateArm(-RORATE_ARM_TICKS, 1.0, 2000);
 
         }
         else if (line.equals("right")) {
             encoderDrive(0.2,  27,  27, 5.0);
-            strafe(-0.3,500);
+            //strafe(-0.3,400);
+            strafe_encoder(0.3, 8, 8, 5.0);
             //turnToTargetYaw(-20+yaw0, 0.2, 5000);
 
             dropPixelOnLine();
             encoderDrive(0.3,  -2,  -2, 5.0);
-            strafe(0.3,1000);
+            //strafe(0.3,800);
+            strafe_encoder(0.3, -10, -10, 5.0);
             encoderDrive(0.3,  28,  28, 5.0);
 
             //turnToTargetYaw4(yaw0, 1.0, 4000);
             //encoderDrive(0.5,  45,  45, 5.0);
             turnToTargetYaw2(-90+yaw0, 1.0, 4000);
             encoderDrive(0.5,  -70,  -70, 5.0);
-            turnToTargetYaw2(-65+yaw0, 1.0, 4000);
+            turnToTargetYaw2(-63+yaw0, 1.0, 4000);
 
             RotateArm(RORATE_ARM_TICKS, 1.0, 2000);
             //rotator.setPower(0.1);
@@ -117,17 +121,20 @@ public class Blue_Far_Board extends AutoCommon {
             grabberL.setPosition(BotCoefficients.grabberLeftOpen);
             //rotator.setPower(0.1);
             sleep(1000);
+            RotateArm(-RORATE_ARM_TICKS, 1.0, 2000);
 
         }
         else {
             encoderDrive(0.2,  29,  29, 5.0);
-            strafe(0.3,1400);
+            //strafe(0.3,1400);
+            strafe_encoder(0.3, -22, -22, 5.0);
             dropPixelOnLine();
-            strafe(-0.3,1500);
+            //strafe(-0.3,1500);
+            strafe_encoder(0.3, 24, 24, 5.0);
             //turnToTargetYaw(55+yaw0, 0.2, 5000);
             //encoderDrive(0.2,  6,  6, 5.0);
             //dropPixelOnLine();
-            encoderDrive(0.3,  28,  28, 5.0);
+            encoderDrive(0.3,  29,  29, 5.0);
             //turnToTargetYaw2(yaw0, 1.0, 5000);
 
             //encoderDrive(0.5,  40,  40, 5.0);
@@ -142,6 +149,7 @@ public class Blue_Far_Board extends AutoCommon {
             grabberL.setPosition(BotCoefficients.grabberLeftOpen);
             //rotator.setPower(0.1);
             sleep(1000);
+            RotateArm(-RORATE_ARM_TICKS, 1.0, 2000);
 
         }
 
